@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/geramy92/easy_merge_json_cli#readme",
   "bin": {
-    "emjson": "./index.js"
+    "emjson": "./bin/emjson"
   },
   "dependencies": {
     "commander": "^2.9.0",
