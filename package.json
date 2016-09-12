@@ -1,0 +1,26 @@
+{
+  "name": "easy_merge_json_cli",
+  "version": "1.0.0",
+  "description": "easy merge to json files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geramy92/easy_merge_json_cli.git"
+  },
+  "author": "geramy92",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geramy92/easy_merge_json_cli/issues"
+  },
+  "homepage": "https://github.com/geramy92/easy_merge_json_cli#readme",
+  "bin": {
+    "emjson": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "merge": "^1.2.0"
+  }
+}

@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+"use strict";
+
+var program = require('commander');
+var fs = require('fs');
+var merge = require('merge');
+
+var sourceFile, toMerge;
+
+program
+    .version('1.0.0')
+    .option('-s, --source <sourceFile>', '[Required] Source file')
+    .option('-f, --file <toMergeWith>', '[Required] Json file that should be merged in the source file')
+    .option('-p, --prettify', 'Will print the json as human readable json')
+    .option('-o, --output <outputFile>', 'Output file - default: source file')
+    .parse(process.argv);
+
+
+if (program.source && program.file) {
+    if (!fs.existsSync(program.source)) {
+        console.error("Source file does not exist!");
+        process.exit(1)
+    }
+    let jsonSource = JSON.parse(fs.readFileSync(program.source));
+
+    if (!fs.existsSync(program.file)) {
+        console.error("Merge Json file does not exist!");
+        process.exit(1)
+    }
+    let jsonToMerge = JSON.parse(fs.readFileSync(program.file));
+
+    let result = merge.recursive(jsonSource, jsonToMerge);
+
+    let jsonResult;
+    if (program.prettify) {
+        jsonResult = JSON.stringify(result, null, 4);
+    } else {
+        jsonResult = JSON.stringify(result);
+    }
+
+    if (program.output) {
+        fs.writeFileSync(program.output, jsonResult);
+    } else {
+        fs.writeFileSync(program.source, jsonResult);
+    }
+
+} else {
+    console.error("Required options missing: Source, File. See emjson --help");
+}
